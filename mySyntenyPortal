@@ -1,0 +1,98 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+use FindBin;
+use File::Basename;
+use Cwd 'abs_path';
+use Getopt::Long qw(:config no_ignore_case);
+
+my $func = shift;
+my $root_path = $FindBin::RealBin;
+my $webroot_path = "/var/www/html";
+my $data_dir = "$root_path/data";
+my $config_F = "";
+my $help;
+my $website_name = "";
+my $core = 10;
+
+GetOptions (
+		"conf|c=s" => \$config_F,
+		"website_name|w=s" => \$website_name,
+		"core|p=s" => \$core,
+		"help|h" => \$help,
+);
+
+if(!$func || $help){
+	&print_help(); exit(1);
+} elsif ($func eq "build"){
+	##### Building database #####
+	print STDERR "\nBuilding a website...\n";
+	if($config_F eq ""){
+		print STDERR "\nEnter a configuration file!!\n";
+		print STDERR "\n-------------------------------------------------------------------\n";
+		&print_help(); exit(1);
+	}
+	`$root_path/scripts/build_mySyntenyPortal.pl -conf $config_F -p $core`;
+	print STDERR "Done.\n\n";
+} elsif ($func eq "remove") {
+	##### Removing database #####
+	my $flag = "";
+	if($config_F ne ""){
+		open(F,"$config_F");
+		while(<F>){
+			chomp;
+			if($_ eq "" || $_ =~ /^#/){next;}
+			if($_ =~ /^>/){
+				if($_ eq ">Website_name"){$flag = "projectName";}
+				else {$flag = "";}
+				next;
+			}
+			if($flag eq "projectName"){
+				$website_name = $_;
+				$website_name =~ s/\s+//g;
+			}
+		}
+		close(F);
+	}
+	if($website_name eq ""){
+		print STDERR "\nEnter a website name!!\n";
+		print STDERR "\n-------------------------------------------------------------------\n";
+		&print_help(); exit(1);
+	}
+	if(-d "$data_dir/$website_name"){
+		print STDERR "\nRemoving a website... [$website_name]\n";
+		`$root_path/scripts/delete_website.pl $website_name`;
+		print STDERR "Done.\n\n";
+	} else {
+		print STDERR "\nNot existing... [$website_name]\n\n";
+	}
+} else {
+	&print_help();
+}
+
+sub print_help{
+	print STDERR "
+Usage:  ./mySyntenyPortal [build|remove] <parameters>
+  
+  ** It may require a 'sudo' privilege. **
+
+Simple examples:
+    ./mySyntenyPortal build -conf ./configurations/sample.conf
+    ./mySyntenyPortal remove -website_name Sample_website
+
+Commands:
+    build              => build a website
+    remove             => remove a website
+
+Parameters:
+  [ build ]
+    -conf|c            => Configuration file
+    -core|p            => Number of threads (default: 10)
+
+  [ remove ]
+    -website_name|w    => Website name
+    -conf|c            => Configuration file
+
+";
+}

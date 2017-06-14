@@ -1,0 +1,13 @@
+/usr/local/lib64/perl5/Sort/Key.pm
+/usr/local/lib64/perl5/Sort/Key/Maker.pm
+/usr/local/lib64/perl5/Sort/Key/Multi.pm
+/usr/local/lib64/perl5/Sort/Key/Natural.pm
+/usr/local/lib64/perl5/Sort/Key/Register.pm
+/usr/local/lib64/perl5/Sort/Key/Types.pm
+/usr/local/lib64/perl5/auto/Sort/Key/Key.so
+/usr/local/share/man/man3/Sort::Key.3pm
+/usr/local/share/man/man3/Sort::Key::Maker.3pm
+/usr/local/share/man/man3/Sort::Key::Multi.3pm
+/usr/local/share/man/man3/Sort::Key::Natural.3pm
+/usr/local/share/man/man3/Sort::Key::Register.3pm
+/usr/local/share/man/man3/Sort::Key::Types.3pm

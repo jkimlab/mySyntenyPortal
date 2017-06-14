@@ -1,0 +1,11 @@
+Code: Cinteny2CS.pl
+Input: Cinteny.output.txt
+Output: Cinteny2CS.out
+
+Code: Satsuma2CS.pl
+Input: Satsuma.output.txt #original file name: satsuma_summary.chained.out
+Output: Satsuma2CS.out
+
+Code: SyntenyTracker2CS.pl
+Input: SyntenyTracker.output.txt
+Output: SyntenyTracker2CS.out
