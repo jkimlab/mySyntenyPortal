@@ -23,6 +23,22 @@ System requirements
  To list all required perl modules, use the command below.
 
     perl ./src/check_modules.pl
+    
+ If any problem in perl modules, remove the perl libraries in mySyntenyPortal package and install the required libraries.
+ 
+    1. Remove the perl modules in our package
+        $ cd mySyntenyPortal/src/lib/
+        $ rm -rf auto  Data  JSON  JSON.pm  Parallel  Sort
+
+      * Do not remove "Check" module for checking required perl modules
+
+    2. Check the required perl modules 
+        $ perl mySyntenyPortal/src/check_modules.pl
+
+    3. Install the required perl modules
+        $ perl -MCPAN -eshell
+        > install [perl module name]
+
 
 Download source
 -------------------
