@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use FindBin;
 use FindBin '$Bin';
-use lib "$Bin/lib/";
+use lib "$Bin";
 
 
 BEGIN {

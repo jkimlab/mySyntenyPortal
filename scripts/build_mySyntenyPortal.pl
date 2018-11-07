@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 use FindBin;
-use lib "$FindBin::RealBin/../src/lib";
 use Getopt::Long qw(:config no_ignore_case);
 use Sort::Key::Natural 'natsort';
 use Data::PowerSet 'powerset';

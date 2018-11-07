@@ -16,7 +16,7 @@ $state_f = fopen("../session/$user_id/cur_state","r");
 while($line = fgets($state_f)){
 	$line = trim($line);
 	if(empty($line)){continue;}
-	$arr = split("[[:space:]]",$line);
+	$arr = preg_split("/\s+/",$line);
 	if(preg_match('/^SC/',$line)){
 		if($arr[1] == "circos_num"){
 			$circos_num = $arr[2];
@@ -25,10 +25,10 @@ while($line = fgets($state_f)){
 		if($arr[0] === "Project_name"){
 			$project_name = $arr[1];
 		} else if ($arr[0] === "Ref_names"){
-			$tar_arr = split("[,]",$arr[1]);
+			$tar_arr = preg_split("/,/",$arr[1]);
 		} else if ($arr[0] === "Resolutions"){
 			if($arr[1] != 0){
-				$resolution_arr = split("[,]",$arr[1]);
+				$resolution_arr = preg_split("/,/",$arr[1]);
 			}
 		} else {
 		}
@@ -49,7 +49,7 @@ $circos_arr_index = 0;
 $circos_info_f = fopen("../session/$user_id/circos/circos$circos_num/circos$circos_num.info","r");
 while($line = fgets($circos_info_f)){
 	$line = trim($line);
-	$arr = split("[[:space:]]",$line);
+	$arr = preg_split("/\s+/",$line);
 	if(preg_match('/^Resolution/',$line)){
 		$circos_resolution = $arr[1];
 	} else if (preg_match('/^Cytoband/',$line)){
@@ -134,7 +134,7 @@ fclose($circos_info_f);
 			$tmp_chr_arr = array();
 			while($line = fgets($size_F)){
 				$line = trim($line);
-				$arr_tmp = split("[[:space:]]",$line);
+				$arr_tmp = preg_split("/\s+/",$line);
 				$chr_num = $arr_tmp[0];
 				array_push($tmp_chr_arr,$chr_num);
 			}

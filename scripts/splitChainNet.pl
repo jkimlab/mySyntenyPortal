@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 use FindBin;
-use lib "$FindBin::RealBin/../src/lib";
 use Cwd 'abs_path';
 use File::Basename;
 use Getopt::Long qw(:config no_ignore_case);

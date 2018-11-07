@@ -4,7 +4,7 @@
 	$size_F = fopen("../data/sizes/$tar_name.sizes","r");
 	while($line = fgets($size_F)){
 		$line = trim($line);
-		$arr_tmp = split("[[:space:]]",$line);
+		$arr_tmp = preg_split("/\s+/",$line);
 		$chr_num = $arr_tmp[0];
 		array_push($tmp_chr_arr,$chr_num);
 	}

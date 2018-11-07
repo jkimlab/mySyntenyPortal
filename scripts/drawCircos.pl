@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 use FindBin;
-use lib "$FindBin::RealBin/../src/lib";
 use File::Basename;
 use Cwd 'abs_path';
 use Sort::Key::Natural 'natsort';

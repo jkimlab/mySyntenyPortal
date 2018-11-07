@@ -7,7 +7,7 @@
 		while($line = fgets($reset_F)){
 			$line = trim($line);
 			if(preg_match('/^SC/',$line)){
-				$arr = split("[[:space:]]",$line);
+				$arr = preg_split("/\s+/",$line);
 				$circos_num = $arr[2];
 			}
 		}
@@ -30,7 +30,7 @@
 		while($line = fgets($reset_F)){
 			$line = trim($line);
 			if(preg_match('/^SB/',$line)){
-				$arr = split("[[:space:]]",$line);
+				$arr = preg_split("/\s+/",$line);
 				$browser_info[$arr[1]] = $arr[2];
 			}
 		}
@@ -40,7 +40,7 @@
 		while($line = fgets($prev_F)){
 			$line = trim($line);
 			if(preg_match('/^SB/',$line)){
-				$arr = split("[[:space:]]",$line);
+				$arr = preg_split("/\s+/",$line);
 				$t = $arr[1];
 				fwrite($cur_F,"$arr[0]\t$arr[1]\t$browser_info[$t]\n");
 			} else {

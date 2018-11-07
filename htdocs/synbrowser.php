@@ -42,7 +42,7 @@ $state_f = fopen("../data/$project_base/cur_state","r");
 while($line = fgets($state_f)){
 	$line = trim($line);
 	if(empty($line)){continue;}
-	$arr = split("[[:space:]]",$line);
+	$arr = preg_split("/\s+/",$line);
 	if(preg_match('/^SB/',$line)){
 		if($arr[1] == "ref_name"){
 			$ref_name = $arr[2];
@@ -57,13 +57,13 @@ while($line = fgets($state_f)){
 		if($arr[0] === "Project_name"){
 			$project_name = $arr[1];
 		} else if ($arr[0] === "Project_desc"){
-			$arr2 = split("[\t]",$line);
+			$arr2 = preg_split("/\t/",$line);
 			$project_desc = $arr2[1];	
 		} else if ($arr[0] === "Ref_names"){
-			$tar_arr = split("[,]",$arr[1]);
+			$tar_arr = preg_split("/,/",$arr[1]);
 		} else if ($arr[0] === "Resolutions"){
 			if($arr[1] != 0){
-				$resolution_arr = split("[,]",$arr[1]);
+				$resolution_arr = preg_split("/,/",$arr[1]);
 			}
 		} else {
 		}
@@ -80,7 +80,7 @@ if(isset($_GET['TAR'])){$tar_name = $_GET['TAR'];} else {
 				continue;
 			} else {
 				if(ereg(".linear",$v)){
-					$arr_tmp = split("[.]",$v);
+					$arr_tmp = preg_split("/[.]/",$v);
 					if($arr_tmp[1] == $ref_name){continue;}
 					$tar_name = $arr_tmp[1];
 					break;
@@ -130,7 +130,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 		$line = trim($line);
 		if(preg_match('/^#/',$line)){
 			if(ereg("(^#$ref_name)",$line)){
-				$arr_tmp = split("[[:space:]]",$line);
+				$arr_tmp = preg_split("/\s+/",$line);
 				$asmbl = $arr_tmp[1];
 				$asmblL = $arr_tmp[2];
 				array_push($arr_ref_asmbl,$asmbl);
@@ -174,7 +174,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 			continue;
 		} else {
 			if(ereg(".linear",$v)){
-				$arr_tmp = split("[.]",$v);
+				$arr_tmp = preg_split("/[.]/",$v);
 				if($arr_tmp[0] !== $ref_name){continue;}
 				if($arr_tmp[1] == $tar_name){array_push($arr_resolution,$arr_tmp[2]);}
 				if(in_array($arr_tmp[1],$tar_flag)){continue;}
@@ -302,7 +302,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 		$line = trim($line);
 		if(preg_match('/^#/',$line)){
 			if(ereg("(^#".$arr_spc[0].")",$line)){
-				$arr_tmp = split("[[:space:]]",$line);
+				$arr_tmp = preg_split("/\s+/",$line);
 				$asmbl = $arr_tmp[1];
 				$asmblL = $arr_tmp[2];
 				if ($asmbl == $selected_asmbl){
@@ -311,11 +311,11 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 				array_push($arr_ref_asmbl,$asmbl);
 			}
 		} else {
-			$arr_tmp = split("\|",$line);
+			$arr_tmp = preg_split("/\|/",$line);
 			$ref_asmbl = "";
 			$target_asmbl = "";
 			for ($i = 0, $j = count($arr_tmp); $i < $j; $i++){
-				$arr_block_info = split("[[:space:]]",$arr_tmp[$i]);
+				$arr_block_info = preg_split("/\s+/",$arr_tmp[$i]);
 				$block_con = $arr_block_info[0];
 				$block_asmbl = $arr_block_info[1];
 				if ($i == 0){
@@ -362,7 +362,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	$input_f = fopen("../data/$project_base/browser/colors.mySyntenyPortal.conf","r");
 	while($line = fgets($input_f)){
 		$line = trim($line);
-		$arr_tmp = split(" = ",$line);
+		$arr_tmp = preg_split("/ = /",$line);
 		$rgb = $arr_tmp[1];
 		$text_col = getContrastYIQ($rgb);
 		if ($ref_asmbl_num >= count($arr_ref_asmbl)){
@@ -391,7 +391,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	$arr_tarchr = array();
 	foreach ($ref_target_asmbl as $ref_asmbl => $target_chr)
 	{
-		$arr_tmp = split("[[:space:]]",$target_chr);
+		$arr_tmp = preg_split("/\s+/",$target_chr);
 		natsort($arr_tmp);
 		$arr_tarchr = array_values($arr_tmp);
 		$target_info = implode("\t",$arr_tarchr);
@@ -408,7 +408,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	while($line = fgets($input_f)){
 		$line = trim($line);
 		if (ereg("(^#".$arr_spc[1].")",$line)){
-			$arr_tmp = split("[[:space:]]",$line);
+			$arr_tmp = preg_split("/\s+/",$line);
 			$asmbl = $arr_tmp[1];
 			$asmblL = $arr_tmp[2];
 			if (in_array($asmbl,$arr_tarchr)){
@@ -451,7 +451,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 		}
 		while($line = fgets($input_f)){
 			$line = trim($line);
-			$arr_tmp = split("[[:space:]]",$line);
+			$arr_tmp = preg_split("/\s+/",$line);
 			$chr = $arr_tmp[0];
 			$chr = "chr$chr";
 			$tracks = $arr_tmp[1];
@@ -491,7 +491,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 		}
 		while($line = fgets($input_f)){
 			$line = trim($line);
-			$arr_tmp = split("\t",$line);
+			$arr_tmp = preg_split("/\t/",$line);
 			$ref_chr = $arr_tmp[1];
 			$block_con = $arr_tmp[0];
 			if ($ref_chr == $selected_asmbl){
@@ -533,7 +533,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	}
 	
 	function getContrastYIQ($rgb){
-		$arr_col = split(",",$rgb);
+		$arr_col = preg_split("/,/",$rgb);
 		$yiq = (($arr_col[0]*299)+($arr_col[1]*587)+($arr_col[2]*114))/1000;
 		return ($yiq >= 128) ? 'black' : 'white';
 	}

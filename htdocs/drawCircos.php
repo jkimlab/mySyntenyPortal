@@ -15,7 +15,7 @@
 	while($line = fgets($state_f)){
 		$line = trim($line);
 		if(preg_match('/^Cytoband/',$line)){
-			$arr = split('[[:space:]]',$line);
+			$arr = preg_split('/\s+/',$line);
 			fwrite($circos_info,"Cytoband\t$arr[1]\t$cytoband_dir/$arr[1].cytoband.txt\n");
 		}
 	}

@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use FindBin;
 use FindBin '$Bin';
-use lib "$FindBin::RealBin/../src/lib";
 use Sort::Key::Natural 'natsort';
 use File::Basename;
 use Getopt::Long qw(:config no_ignore_case);

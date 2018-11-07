@@ -12,9 +12,9 @@
 		$line = trim($line);
 		if(empty($line)){continue;}
 		if(preg_match('/^Tar_names/',$line)){
-			$arr = split("[[:space:]]",$line);
+			$arr = preg_split("/\s+/",$line);
 			if($arr[1] == $ref_name){
-				$arr2 = split("[,]",$arr[2]);
+				$arr2 = preg_split("/,/",$arr[2]);
 				foreach ($arr2 as $i => $tar){
 					array_push($tar_arr,$tar);
 				}				

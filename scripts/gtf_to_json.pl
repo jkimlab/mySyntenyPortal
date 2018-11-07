@@ -2,7 +2,6 @@
 use strict;
 use warnings;
 use FindBin;
-use lib "$FindBin::RealBin/../src/lib";
 use FindBin qw($Bin);
 use Cwd 'abs_path';
 use Getopt::Long;
