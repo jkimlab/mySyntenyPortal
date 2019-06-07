@@ -76,10 +76,10 @@ if(isset($_GET['TAR'])){$tar_name = $_GET['TAR'];} else {
 	if(isset($_GET['REF'])){
 		$files = scandir("../data/$project_base/browser");
 		foreach ($files as $v){
-			if (ereg("^[.]",$v)){
+			if (preg_match("/^[.]/",$v)){
 				continue;
 			} else {
-				if(ereg(".linear",$v)){
+				if(preg_match("/.linear/",$v)){
 					$arr_tmp = preg_split("/[.]/",$v);
 					if($arr_tmp[1] == $ref_name){continue;}
 					$tar_name = $arr_tmp[1];
@@ -129,7 +129,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	while($line = fgets($input_f)){
 		$line = trim($line);
 		if(preg_match('/^#/',$line)){
-			if(ereg("(^#$ref_name)",$line)){
+			if(preg_match("(^#$ref_name)",$line)){
 				$arr_tmp = preg_split("/\s+/",$line);
 				$asmbl = $arr_tmp[1];
 				$asmblL = $arr_tmp[2];
@@ -170,10 +170,10 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	$arr_resolution = array();
 	$files = scandir("../data/$project_base/browser");
 	foreach ($files as $v){
-		if (ereg("^[.]",$v)){
+		if (preg_match("/^\./",$v)){
 			continue;
 		} else {
-			if(ereg(".linear",$v)){
+			if(preg_match("/.linear/",$v)){
 				$arr_tmp = preg_split("/[.]/",$v);
 				if($arr_tmp[0] !== $ref_name){continue;}
 				if($arr_tmp[1] == $tar_name){array_push($arr_resolution,$arr_tmp[2]);}
@@ -301,7 +301,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	while($line = fgets($input_f)){
 		$line = trim($line);
 		if(preg_match('/^#/',$line)){
-			if(ereg("(^#".$arr_spc[0].")",$line)){
+			if(preg_match("/(^#".$arr_spc[0].")/",$line)){
 				$arr_tmp = preg_split("/\s+/",$line);
 				$asmbl = $arr_tmp[1];
 				$asmblL = $arr_tmp[2];
@@ -407,7 +407,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 	}
 	while($line = fgets($input_f)){
 		$line = trim($line);
-		if (ereg("(^#".$arr_spc[1].")",$line)){
+		if (preg_match("/(^#".$arr_spc[1].")/",$line)){
 			$arr_tmp = preg_split("/\s+/",$line);
 			$asmbl = $arr_tmp[1];
 			$asmblL = $arr_tmp[2];
@@ -495,7 +495,7 @@ if(isset($_GET['GENE'])){$search_gene = $_GET['GENE'];}
 			$ref_chr = $arr_tmp[1];
 			$block_con = $arr_tmp[0];
 			if ($ref_chr == $selected_asmbl){
-				if (!ereg("(^#)",$line)){
+				if (!preg_match("/(^#)/",$line)){
 					if (!array_key_exists($ref_chr,$gene_ex)){	
 						$id = 1;
 						if (!array_key_exists("7",$gene_ex[$ref_chr])){
