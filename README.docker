@@ -5,4 +5,13 @@ First, build the docker image with build-docker.sh.
 Once that's complete, edit run-docker.sh to launch docker on the host port of your choice.
 Currnetly set to 8080.
 
-run "run-docker.sh". Once launched, run "launch-inside-docker.sh" at the prompt.
+run "run-docker.sh". 
+
+At the prompt, build myCircos, with 
+
+"./install.pl build"
+
+
+====== each launch ======
+Once built, run "launch-inside-docker.sh" at the prompt. This installs the web files in the temporary
+filesystem and launches the web server. Do this every time you run.

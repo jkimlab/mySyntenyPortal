@@ -4,7 +4,7 @@ RUN apt-get update -y
 RUN apt-get install -y perl python wget bzip2 git openssh-server apache2 php php-common gcc imagemagick php-imagick php-imagick zlib1g-dev libpng-dev make sudo g++ automake build-essential
 RUN apt-get install -y pkg-config libgd-dev
 RUN wget http://security.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1_amd64.deb
-RUN dpkg -i http://security.ubuntu.com/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1.1_amd64.deb
+RUN dpkg -i libpng12-0_1.2.54-1ubuntu1.1_amd64.deb
 RUN echo 'ServerName localhost' >> /etc/apache2/apache2.conf
 RUN mkdir /var/run/sshd
 RUN echo 'root:root' | chpasswd
