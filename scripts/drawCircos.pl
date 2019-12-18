@@ -489,7 +489,7 @@ band_transparency     = 2
 </ideogram>";
 close O7;
 #########################################################
-`$circos_dir/bin/circos -conf $circos_input/confs/$prefix.circos.conf >& $outdir/circos.log`;
+`$circos_dir/bin/circos -conf $circos_input/confs/$prefix.circos.conf 2> $outdir/circos.log`;
 `convert -density 100 $outdir/circos.svg $outdir/circos.pdf`;
 `convert -density 100 $outdir/circos.svg $outdir/circos.png`;
 `convert -density 100 $outdir/circos.svg $outdir/circos.jpg`;

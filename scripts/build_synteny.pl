@@ -50,7 +50,7 @@ print W "D = $syn_src\n";
 close(W);
 print 
 `cat $syn_make_f >> $out_dir/Makefile`;
-`make -C $out_dir >& $out_dir/log.txt`;
+`make -C $out_dir 2> $out_dir/log.txt`;
 `make tidy -C $out_dir`;
 if(-f "$out_dir/synteny_blocks.txt"){
 	my $tmp_dir = "$out_dir/tmp";
