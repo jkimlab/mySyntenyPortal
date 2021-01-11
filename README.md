@@ -267,6 +267,12 @@ Third party tools
 * inferCars (http://www.bx.psu.edu/miller_lab/car/)
 * Circos (http://circos.ca/)
 
+
+How to cite
+-----------
+Lee J, Lee D, Sim M, Kwon D, Kim J, Ko Y, Kim J. mySyntenyPortal: an application package to construct websites for synteny block analysis. BMC Bioinformatics. 2018 Jun 5;19(1):216. doi: 10.1186/s12859-018-2219-x.
+
+
 Contact
 -------------------  
 bioinfolabkr@gmail.com
